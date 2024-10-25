@@ -23,10 +23,12 @@ pipeline {
                     // Replace this with your deployment script
                     // e.g., sh 'scp -r . user@server:/var/www/html'
                     sh '''
+                        pwd
+                        ls -ltr
                         # Define variables
-                        SERVER_USER=user
-                        SERVER_IP=localhost
-                        WEB_ROOT=/var/www/html
+                        #SERVER_USER=user
+                        #SERVER_IP=localhost
+                        #WEB_ROOT=/var/www/html
 
                         # Copy the index.html to the web root directory
                         scp -o StrictHostKeyChecking=no -r UserRegistration ${SERVER_USER}@${SERVER_IP}:${WEB_ROOT}
