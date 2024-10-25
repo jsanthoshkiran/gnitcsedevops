@@ -23,6 +23,7 @@ pipeline {
                     // Replace this with your deployment script
                     // e.g., sh 'scp -r . user@server:/var/www/html'
                     sh '''
+                        rm -rf *
                         pwd
                         ls -ltr
                         # Define variables
