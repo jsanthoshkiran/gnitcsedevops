@@ -31,7 +31,7 @@ pipeline {
                         WEB_ROOT=/var/www/html
 
                         # Copy the index.html to the web root directory
-                        scp -o StrictHostKeyChecking=no -r UserRegistration ${SERVER_IP}:${WEB_ROOT}
+                        scp -o StrictHostKeyChecking=no -r UserRegistration/UserRegistraton ${SERVER_IP}:${WEB_ROOT}
                     '''
                 }
             }
