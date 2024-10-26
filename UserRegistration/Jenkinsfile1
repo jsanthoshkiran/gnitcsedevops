@@ -22,8 +22,6 @@ pipeline {
                     echo 'Deploying the project...'
                     // Replace this with your deployment script
                     // e.g., sh 'scp -r . user@server:/var/www/html'
-                    //Set-Locatopn "C:\Temp"
-                    //Move-Item -Path ./UserRegistration -Destination "C:\Temp\Archive\Logs" -recurse
                 }
             }
         }
