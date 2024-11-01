@@ -23,7 +23,6 @@ pipeline {
                     def targetDir = "E:\\nginx-1.26.2\\html\\UserRegistration"  
                     sh "robocopy . $targetDir /E"  
                 }  
-                }
             }
         }
     }
