@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/jsanthoshkiran/gnitcsedevops.git'
+                git branch: 'mdev', url: 'https://github.com/jsanthoshkiran/gnitcsedevops.git'
             }
         }
         
@@ -16,14 +16,13 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to Nginx') {
             steps {
                 script {
                     echo 'Deploying the project...'
-                    // Replace this with your deployment script
-                    // e.g., sh 'scp -r . user@server:/var/www/html'
-                    //Set-Locatopn "C:\Temp"
-                    //Move-Item -Path ./UserRegistration -Destination "C:\Temp\Archive\Logs" -recurse
+                    def targetDir = "E:\nginx-1.26.2\html"  
+                    sh "robocopy . $targetDir /E"  
+                }  
                 }
             }
         }
