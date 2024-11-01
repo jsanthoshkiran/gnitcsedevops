@@ -21,7 +21,12 @@ pipeline {
                 script {
                     echo 'Deploying the project...'
                     def targetDir = "E:\\nginx-1.26.2\\html\\UserRegistration"  
-                    sh "robocopy . $targetDir /E"  
+                    //sh "robocopy . $targetDir /E"
+                    // Use PowerShell to copy files  
+                    powershell """  
+                    $sourceDir = Get-Location  
+                    Copy-Item -Path "$sourceDir\\*" -Destination "$targetDir" -Recurse -Force  
+                    """  
                 }  
             }
         }
