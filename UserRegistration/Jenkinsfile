@@ -34,10 +34,13 @@ pipeline {
                     $targetDir = "E:\\nginx-1.26.2\\html"  
                     //sh "robocopy . $targetDir /E"
                     // Use PowerShell to copy files
-                    def sourceDir = sh(script: "echo \$(pwd)", returnStdout: true)
-                    powershell """
-                    Copy-Item -Path "$sourceDir\\*" -Destination "$targetDir" -Recurse -Force  
-                    """  
+                    dir("${WORKSPACE}") {
+                        fileOperations([fileCopyOperation(excludes: '', flattenFiles: true, includes: '*.*', targetLocation: "$targetDir")])
+                    }
+                    //def sourceDir = $work
+                    //powershell """
+                    //Copy-Item -Path "$sourceDir\\*" -Destination "$targetDir" -Recurse -Force  
+                    //"""  
                 }  
             }
         }
