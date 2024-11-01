@@ -30,8 +30,8 @@ pipeline {
         stage('Deploy to Nginx') {
             steps {
                 script {
-                    echo 'Deploying the project...'
-                    $targetDir = "E:\\nginx-1.26.2\\html"  
+                    def targetDir = "E:\\nginx-1.26.2\\html" 
+                    echo 'Deploying the project...' 
                     //sh "robocopy . $targetDir /E"
                     // Use PowerShell to copy files
                     dir("${WORKSPACE}") {
