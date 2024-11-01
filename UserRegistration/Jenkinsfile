@@ -30,17 +30,14 @@ pipeline {
         stage('Deploy to Nginx') {
             steps {
                 script {
-                    def targetDir = "E:\nginx-1.26.2\html" 
-                    echo 'Deploying the project...' 
-                    robocopy . $targetDir /E
-                    // Use PowerShell to copy files
-                    //dir("${WORKSPACE}") {
-                        //fileOperations([fileCopyOperation(excludes: '', flattenFiles: true, includes: '*.*', targetLocation: "$targetDir")])
-                    //}
-                    //def sourceDir = $work
-                    //powershell """
-                    //Copy-Item -Path "$sourceDir\\*" -Destination "$targetDir" -Recurse -Force  
-                    //"""  
+                    echo 'Deploying the project...'
+                    powershell """
+                    def sourceDir = Set-Location
+                    def targetDir = "E:\nginx-1.26.2\html\" 
+                    if (Test-Path -Path $targetDir) {
+                      Copy-Item -Path "$sourceDir" -Destination "$targetDir"
+                    }
+                    """
                 }  
             }
         }
