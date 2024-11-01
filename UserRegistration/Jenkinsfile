@@ -12,7 +12,9 @@ pipeline {
 
             steps {
 
-                sh 'cmd /c "cd /d %cd% && echo %cd%"'
+                powershell """
+                   pwd
+                """
 
             }
         }
