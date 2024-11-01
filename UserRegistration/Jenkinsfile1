@@ -18,11 +18,16 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                script {
-                    echo 'Deploying the project...'
-                    // Replace this with your deployment script
-                    // e.g., sh 'scp -r . user@server:/var/www/html'
-                }
+                echo 'Deploying the project...'
+                    sh '''
+                        # Define variables
+                        #SERVER_USER=user
+                        #SERVER_IP=localhost
+                        WEB_ROOT="E:/nginx-1.26.2/html/"
+
+                        # Copy the index.html to the Nginx web root directory
+                        scp -o StrictHostKeyChecking=no UserReg.html ${WEB_ROOT}
+                    '''
             }
         }
     }

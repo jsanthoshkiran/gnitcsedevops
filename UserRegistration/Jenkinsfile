@@ -35,10 +35,10 @@ pipeline {
                     def sourceDir = Set-Location
                     def targetDir = "E:/nginx-1.26.2/html/" 
                     if (Test-Path -Path $targetDir) {
-                      Copy-Item -Path "$sourceDir" -Destination "$targetDir"
+                      Copy-Item -Path "$sourceDir/UserReg.html" -Destination "$targetDir" -Force
                     }
                     """
-                }  
+                }
             }
         }
     }
