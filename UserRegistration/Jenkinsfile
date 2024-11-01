@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying the project...'
-                    def targetDir = "E:\\nginx-1.26.2\\html"  
+                    $targetDir = "E:\\nginx-1.26.2\\html"  
                     //sh "robocopy . $targetDir /E"
                     // Use PowerShell to copy files  
                     powershell """  
