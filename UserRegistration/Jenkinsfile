@@ -26,7 +26,7 @@ pipeline {
                         WEB_ROOT="//E//nginx-1.26.2//html//"
 
                         # Copy the index.html to the Nginx web root directories
-                        cp -o UserReg.html ${WEB_ROOT}
+                        cp -f UserReg.html ${WEB_ROOT}
                     '''
             }
         }
