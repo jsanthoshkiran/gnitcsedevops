@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying the project...'
-                    def targetDir = "E:\nginx-1.26.2\html"  
+                    def targetDir = "E:\nginx-1.26.2\html\UserRegistration"  
                     sh "robocopy . $targetDir /E"  
                 }  
                 }
