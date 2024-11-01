@@ -33,9 +33,9 @@ pipeline {
                     echo 'Deploying the project...'
                     $targetDir = "E:\\nginx-1.26.2\\html"  
                     //sh "robocopy . $targetDir /E"
-                    // Use PowerShell to copy files  
-                    powershell """  
-                    $sourceDir = Get-Location  
+                    // Use PowerShell to copy files
+                    $sourceDir = pwd  
+                    powershell """
                     Copy-Item -Path "$sourceDir\\*" -Destination "$targetDir" -Recurse -Force  
                     """  
                 }  
