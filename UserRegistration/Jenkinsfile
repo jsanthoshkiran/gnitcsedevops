@@ -33,7 +33,7 @@ pipeline {
                     echo 'Deploying the project...'
                     powershell """
                     def sourceDir = Set-Location
-                    def targetDir = "E:\nginx-1.26.2\html\" 
+                    def targetDir = "E:/nginx-1.26.2/html/" 
                     if (Test-Path -Path $targetDir) {
                       Copy-Item -Path "$sourceDir" -Destination "$targetDir"
                     }
