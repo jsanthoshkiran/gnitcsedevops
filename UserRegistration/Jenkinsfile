@@ -4,21 +4,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'mdev', url: 'https://github.com/jsanthoshkiran/gnitcsedevops.git'
+                git branch: 'main', url: 'https://github.com/jsanthoshkiran/gnitcsedevops.git'
             }
         }
         
-        stage('Check Current Directory') {
-
-            steps {
-
-                powershell """
-                   pwd
-                """
-
-            }
-        }
-
         stage('Build') {
             steps {
                 script {
@@ -27,18 +16,18 @@ pipeline {
             }
         }
 
-        stage('Deploy to Nginx') {
+        stage('Deploy') {
             steps {
-                script {
-                    echo 'Deploying the project...'
-                    powershell """
-                    def sourceDir = Set-Location
-                    def targetDir = "E:/nginx-1.26.2/html/" 
-                    if (Test-Path -Path $targetDir) {
-                      Copy-Item -Path "$sourceDir/UserReg.html" -Destination "$targetDir" -Force
-                    }
-                    """
-                }
+                echo 'Deploying the project...'
+                    sh '''
+                        # Define variables
+                        #SERVER_USER=user
+                        #SERVER_IP=localhost
+                        WEB_ROOT="E:/nginx-1.26.2/html/"
+
+                        # Copy the index.html to the Nginx web root directory
+                        scp -o StrictHostKeyChecking=no UserReg.html ${WEB_ROOT}
+                    '''
             }
         }
     }
