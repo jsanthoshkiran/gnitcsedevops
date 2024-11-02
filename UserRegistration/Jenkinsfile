@@ -32,7 +32,7 @@ pipeline {
                         # Define variables
                         #SERVER_USER=user
                         #SERVER_IP=localhost
-                        WEB_ROOT="//E//nginx-1.26.2//html//"
+                        WEB_ROOT="/E/nginx-1.26.2/html/"
 
                         # Copy the index.html to the Nginx web root directories
                         cp -f UserReg.html ${WEB_ROOT}
