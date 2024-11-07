@@ -17,8 +17,16 @@ pipeline {
         stage('Deploy') {
             steps { 
                 
-                deploy( adapters: [ tomcatAdapter( tomcatHome: 'E://apache-tomcat-11.0.0', username: 'admin', password: 'admin123', warFile: 'target/calculator-webapp.war' ) ] ) 
+                deploy( adapters: [ tomcatAdapter( tomcatHome: 'E://apache-tomcat-11.0.0', username: 'admin', password: 'admin123', war: 'target/calculator-webapp.war' ) ] ) 
                 }
+        }
+    }
+
+    post{
+        success {
+            mail to: 'jsanthoshkiran@gmail.com'
+              subject: "Successful Build: ${currentBuild.fullDisplayName}"
+              body: "The build ${currentBuild.fullDisplayName} succedded"
         }
     }
 }
