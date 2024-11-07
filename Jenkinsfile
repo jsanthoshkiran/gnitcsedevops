@@ -17,19 +17,17 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh '''
-                        # Define variables
-                        TOMCAT_HOME="E:\\apache-tomcat-11.0.0"
-                        WEBAPP_NAME="calculator-webapp"
-                        WAR_FILE="target/calculator-webapp.war"
-
-                        # Deploy the WAR file to Tomcat
-                        cp -f $WAR_FILE $TOMCAT_HOME/webapps/$WEBAPP_NAME.war
-
-                        # Restart Tomcat server
-                        $TOMCAT_HOME/bin/shutdown.sh
-                        $TOMCAT_HOME/bin/startup.sh
-                    '''
+                bat ''' 
+                    REM Define variables
+                    set TOMCAT_HOME=E:\\apache-tomcat-11.0.0 
+                    set WEBAPP_NAME=calculator-webapp 
+                    set WAR_FILE=target\\calculator-webapp.war 
+                    REM Deploy the WAR file to Tomcat 
+                    copy %WAR_FILE% %TOMCAT_HOME%\\webapps\\%WEBAPP_NAME%.war 
+                    REM Restart Tomcat server 
+                    call %TOMCAT_HOME%\\bin\\shutdown.bat 
+                    call %TOMCAT_HOME%\\bin\\startup.bat
+                '''
                 }
             }
         }
