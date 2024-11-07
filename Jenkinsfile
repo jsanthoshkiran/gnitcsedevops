@@ -19,7 +19,7 @@ pipeline {
                 script {
                     sh '''
                         # Define variables
-                        TOMCAT_HOME="E:\apache-tomcat-11.0.0"
+                        TOMCAT_HOME="E:\\apache-tomcat-11.0.0"
                         WEBAPP_NAME="calculator-webapp"
                         WAR_FILE="target/calculator-webapp.war"
 
