@@ -23,13 +23,10 @@ pipeline {
                     set TOMCAT_HOME=E:\\apache-tomcat-11.0.0
                     set WEBAPP_NAME=calculator-webapp-1.0.war
                     set WAR_LOCATION=.\\target\\
-                    copy %WAR_LOCATION%/%WEBAPP_NAME "E://apache-tomcat-11.0.0//webapps//"
-                    set WAR_FILE=%WAR_LOCATION%\\%WEBAPP_NAME%.war
-                    REM Deploy the WAR file to Tomcat 
-                    copy %WAR_FILE% %TOMCAT_HOME%\\webapps\\%WEBAPP_NAME%.war 
-                    REM Restart Tomcat server 
-                    call %TOMCAT_HOME%\\bin\\shutdown.bat 
-                    call %TOMCAT_HOME%\\bin\\startup.bat
+                    REM Deploy the WAR file to Tomcat
+                    copy %WAR_LOCATION%\\%WEBAPP_NAME %TOMCAT_HOME%\\webapps\\
+                    call %TOMCAT_HOME%\\bin\\catalina stop
+                    call %TOMCAT_HOME%\\bin\\catalina start
                 '''
             }
         }
