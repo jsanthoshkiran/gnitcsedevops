@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps { 
                 
-                copy target//calculator-webapp*.war E://apache-tomcat-11.0.0//webapps//
+                copy $workspace//target//calculator-webapp*.war E://apache-tomcat-11.0.0//webapps//
             }
         }
     }
