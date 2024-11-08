@@ -10,13 +10,15 @@ pipeline {
 
         stage('Build') {
             steps {
+                bat 'mvn'
                 bat 'mvn clean package'
             }
         }
 
         stage('Deploy to Tomcat') {
             steps { 
-                copy target\\webapp.war E:\\apache-tomcat-11.0.0\\webapps\\
+                
+                copy target//calculator-webapp*.war E://apache-tomcat-11.0.0//webapps//
         }
     }
 
