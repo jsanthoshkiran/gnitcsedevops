@@ -24,7 +24,7 @@ pipeline {
                     set WEBAPP_NAME=calculator-webapp-1.0.war
                     set WAR_LOCATION=.\\target\\
                     REM Deploy the WAR file to Tomcat
-                    copy %WAR_LOCATION%\\%WEBAPP_NAME% %TOMCAT_HOME%\\webapps\\
+                    copy %WAR_LOCATION%%WEBAPP_NAME% %TOMCAT_HOME%\\webapps\\
                     call %TOMCAT_HOME%\\bin\\catalina stop
                     call %TOMCAT_HOME%\\bin\\catalina start
                 '''
@@ -34,9 +34,10 @@ pipeline {
 
     post{
         success {
-            mail to: 'jsanthoshkiran@gmail.com',
-              subject: "Successful Build: ${currentBuild.fullDisplayName}",
-              body: "The build ${currentBuild.fullDisplayName} succedded"
+            echo 'The build ${currentBuild.fullDisplayName} succedded'
+        }
+        failure {
+            echo 'The build ${currentBuild.fullDisplayName} failed'
         }
     }
 }
