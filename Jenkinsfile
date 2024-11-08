@@ -18,6 +18,7 @@ pipeline {
             steps { 
                 
                 copy target//calculator-webapp*.war E://apache-tomcat-11.0.0//webapps//
+            }
         }
     }
 
@@ -27,6 +28,5 @@ pipeline {
               subject: "Successful Build: ${currentBuild.fullDisplayName}",
               body: "The build ${currentBuild.fullDisplayName} succedded"
         }
-    
     }
 }
