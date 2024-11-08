@@ -16,9 +16,7 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps { 
-                
-                deploy( adapters: [ tomcatAdapter( tomcatHome: 'E://apache-tomcat-11.0.0', username: 'admin', password: 'admin123', war: 'target/calculator-webapp.war' ) ] ) 
-                }
+                copy target\\webapp.war E:\\apache-tomcat-11.0.0\\webapps\\
         }
     }
 
