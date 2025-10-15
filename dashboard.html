@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deployment Dashboard</title>
+  <style>
+    td input[readonly] { background: #f0f0f0; border: none; }
+    table, th, td { border: 1px solid #ccc; border-collapse: collapse; }
+    th, td { padding: 8px; }
+  </style>
+</head>
+<body>
+  <button onclick="addRow()">Add Row</button>
+  <button onclick="addCol()">Add Column</button>
+  <button onclick="exportCSV()">Save CSV</button>
+  <input type="file" accept=".csv" onchange="importCSV(event)">
+  <table id="dashTable">
+    <thead>
+      <tr>
+        <th>Expected Start Time</th>
+        <th>Expected End Time</th>
+        <th>Actual Start Time</th>
+        <th>Actual End Time</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+<script>
+function addRow() {
+  const table = document.getElementById("dashTable").getElementsByTagName('tbody')[0];
+  const row = table.insertRow();
+  for (let i = 0; i < table.parentNode.rows[0].cells.length; i++) {
+    const cell = row.insertCell();
+    const input = document.createElement('input');
+    input.type = (i < 2) ? 'time' : 'time'; // Use "time" type for time fields, date/time as needed
+    if (i < 2) {
+      input.setAttribute('readonly', true);
+      input.value = '';
+    }
+    cell.appendChild(input);
+  }
+}
+
+function addCol() {
+  const table = document.getElementById("dashTable");
+  const rows = table.rows;
+  const newHeader = document.createElement('th');
+  newHeader.textContent = "New Column";
+  rows[0].appendChild(newHeader);
+
+  for (let i = 1; i < rows.length; i++) {
+    const cell = rows[i].insertCell();
+    const input = document.createElement('input');
+    cell.appendChild(input);
+  }
+}
+
+function exportCSV() {
+  const table = document.getElementById("dashTable");
+  let csv = [];
+  for (let i = 0; i < table.rows.length; i++) {
+    let row = [];
+    const cells = table.rows[i].cells;
+    for (let j = 0; j < cells.length; j++) {
+      if (cells[j].children.length) {
+        row.push(cells[j].children[0].value || "");
+      } else {
+        row.push(cells[j].textContent || "");
+      }
+    }
+    csv.push(row.join(","));
+  }
+  downloadCSV(csv.join("
+"));
+}
+
+function downloadCSV(csv) {
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "dashboard.csv";
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
+
+function importCSV(event) {
+  const input = event.target;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const rows = e.target.result.split("
+");
+    const table = document.getElementById("dashTable");
+    table.tBodies[0].innerHTML = "";
+    rows.slice(1).forEach(row => {
+      if(row.trim()) {
+        const cols = row.split(",");
+        const tr = table.tBodies[0].insertRow();
+        cols.forEach((val, i) => {
+          const cell = tr.insertCell();
+          const input = document.createElement('input');
+          input.value = val.replace(/"/g, '');
+          if (i < 2) input.setAttribute('readonly', true);
+          cell.appendChild(input);
+        });
+      }
+    });
+  };
+  reader.readAsText(input.files[0]);
+}
+</script>
+</body>
+</html>
